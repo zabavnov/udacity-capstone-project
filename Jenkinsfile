@@ -38,6 +38,27 @@ pipeline {
                 '''
               }
             }
+            stage('Deploy k8s') {
+                 steps {
+                withAWS(region:'us-west-2',credentials: 'aws-k8s') {
+                 sh '''
+                 eksctl create cluster \
+                --name prod \
+                --region us-west-2 \
+                --zones us-west-1a \
+                --zones us-west-1b \
+                --version 1.16 \
+                --nodegroup-name nodes \
+                --node-type t3.medium \
+                --node-ami auto \
+                --nodes 2 \
+                --nodes-min 1 \
+                --nodes-max 2
+                kubectl apply --filename=k8-config.yml
+                 '''
+                 }
+            }
+        }
          }
      }
 }
