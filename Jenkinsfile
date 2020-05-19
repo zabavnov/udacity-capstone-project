@@ -17,8 +17,9 @@ pipeline {
          }
          stage('Security Scan') {
               steps {
+              when (BRANCH_NAME = 'master') {
                  aquaMicroscanner imageName: 'alpine:latest', notCompliesCmd: 'exit 1', onDisallowed: 'fail',  outputFormat: 'json'
-              }
+              }}
          }
          stage('Docker build') {
               steps {
