@@ -1,5 +1,8 @@
 pipeline {
      agent any
+     environment {
+         dockerpath = "zabavnov/capstoneproject"
+     }
      stages {
          stage('Build') {
              steps {
@@ -9,6 +12,7 @@ pipeline {
          stage('Lint HTML') {
               steps {
                   sh 'tidy -q -e *.html'
+                  sh 'eccho "Lint success"'
               }
          }
          stage('Security Scan') {
@@ -19,6 +23,19 @@ pipeline {
          stage('Docker build') {
               steps {
                  sh'docker build -t capstoneproject:latest .'
+              }
+         }
+         stage('Docker push') {
+              steps {
+              sh '''
+                  docker login --username zabavnov
+                  docker capstoneproject ${dockerpath}
+                  echo "Docker ID and Image: ${dockerpath}"
+
+                  # Step 3:
+                  # Push image to a docker repository
+                  docker push ${dockerpath}
+              '''
               }
          }
      }
