@@ -45,8 +45,8 @@ pipeline {
                  eksctl create cluster \
                 --name prod \
                 --region us-west-2 \
-                --zones us-west-1a \
-                --zones us-west-1b \
+                --zones us-west-2a \
+                --zones us-west-2b \
                 --version 1.16 \
                 --nodegroup-name nodes \
                 --node-type t3.medium \
