@@ -51,7 +51,6 @@ pipeline {
                 --version 1.16 \
                 --nodegroup-name nodes \
                 --node-type t3.medium \
-                --node-ami auto \
                 --nodes 2 \
                 --nodes-min 1 \
                 --nodes-max 2
@@ -60,6 +59,6 @@ pipeline {
                  }
             }
         }
-         
+
      }
 }
