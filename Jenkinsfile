@@ -29,7 +29,7 @@ pipeline {
               steps {
               withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
                 sh '''
-                    docker capstoneproject ${dockerpath}
+                    docker tag capstoneproject ${dockerpath}
                     echo "Docker ID and Image: ${dockerpath}"
 
                     # Step 3:
@@ -37,7 +37,7 @@ pipeline {
                     docker push ${dockerpath}
                 '''
               }
-            }  
+            }
          }
      }
 }
