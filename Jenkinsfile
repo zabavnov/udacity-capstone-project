@@ -27,15 +27,15 @@ pipeline {
          }
          stage('Docker push') {
               steps {
-              sh '''
-                  docker login --username zabavnov
-                  docker capstoneproject ${dockerpath}
-                  echo "Docker ID and Image: ${dockerpath}"
+              withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
+                sh '''
+                    docker capstoneproject ${dockerpath}
+                    echo "Docker ID and Image: ${dockerpath}"
 
-                  # Step 3:
-                  # Push image to a docker repository
-                  docker push ${dockerpath}
-              '''
+                    # Step 3:
+                    # Push image to a docker repository
+                    docker push ${dockerpath}
+                '''
               }
          }
      }
