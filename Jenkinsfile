@@ -38,6 +38,7 @@ pipeline {
                 '''
               }
             }
+            }
             stage('Deploy k8s') {
                  steps {
                 withAWS(region:'us-west-2',credentials: 'aws-k8s') {
@@ -59,6 +60,6 @@ pipeline {
                  }
             }
         }
-         }
+         
      }
 }
