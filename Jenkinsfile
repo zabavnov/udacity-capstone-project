@@ -37,6 +37,7 @@ pipeline {
                     docker push ${dockerpath}
                 '''
               }
+            }  
          }
      }
 }
