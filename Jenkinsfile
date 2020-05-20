@@ -42,6 +42,9 @@ pipeline {
             }
             }
         stage('Create k8s-cluster') {
+        when {
+       branch 'test'
+        }
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
              sh '''
@@ -64,7 +67,7 @@ pipeline {
         stage('Deploy k8s cluster') {
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
-             sh 'kubectl apply --filename=k8-config.yml '
+             sh 'whoami && kubectl apply --filename=k8-config.yml '
              }
         }
         }
