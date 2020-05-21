@@ -33,7 +33,7 @@ pipeline {
 
                     # Step 3:
                     # Push image to a docker repository
-                    docker push ${dockerpath}
+                    docker push ${dockerpath}:1.1
                 '''
               }
             }
@@ -69,7 +69,7 @@ pipeline {
         }
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
-             sh 'kubectl get pods && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods'
+             sh 'kubectl get pods && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods &&  kubectl set image deployment/capstoneproject capstoneproject=zabavnov/capstoneproject:latest --record && kubectl get deployment capstoneproject'
              }
         }
         }
