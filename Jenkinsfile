@@ -67,7 +67,7 @@ pipeline {
         stage('Deploy k8s cluster') {
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
-             sh 'whoami && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml '
+             sh 'whoami && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods'
              }
         }
         }
