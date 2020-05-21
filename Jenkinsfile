@@ -16,9 +16,6 @@ pipeline {
               }
          }
          stage('Security Scan') {
-         when {
-        branch 'test'
-         }
               steps {
                  aquaMicroscanner imageName: 'alpine:latest', notCompliesCmd: 'exit 1', onDisallowed: 'fail',  outputFormat: 'json'
               }}
