@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: capstoneproject
-        image: capstoneproject:latest
+        image: zabavnov/capstoneproject:latest
         ports:
         - containerPort: 80
 ---
