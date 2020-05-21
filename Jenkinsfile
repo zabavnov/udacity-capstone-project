@@ -73,7 +73,7 @@ pipeline {
              }
         }
         }
-        stage('Create k8s-cluster') {
+        stage('Remove k8s-cluster') {
         when {
        branch 'remove-cluster'
         }
