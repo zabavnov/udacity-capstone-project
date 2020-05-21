@@ -69,7 +69,7 @@ pipeline {
         }
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
-             sh 'kubectl get pods && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods &&  kubectl set image deployment/capstoneproject capstoneproject=zabavnov/capstoneproject:latest --record && kubectl get deployment capstoneproject'
+             sh 'kubectl get pods && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods &&  kubectl set image deployment/capstoneproject capstoneproject=zabavnov/capstoneproject:latest --record && kubectl rollout status deployment capstoneproject && kubectl get deployment capstoneproject'
              }
         }
         }
