@@ -4,7 +4,7 @@
 
 # Step 1:
 # Build image and add a descriptive tag
-docker build -t capstoneproject:latest .
+docker build -t capstoneproject:1.1 .
 # Step 2:
 # List docker images
 docker image ls

@@ -21,7 +21,7 @@ pipeline {
               }}
          stage('Docker build') {
               steps {
-                 sh'docker build -t capstoneproject:latest .'
+                 sh'docker build -t capstoneproject:1.1 .'
               }
          }
          stage('Docker push') {
