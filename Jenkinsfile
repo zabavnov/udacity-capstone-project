@@ -28,7 +28,7 @@ pipeline {
               steps {
               withDockerRegistry([url: "", credentialsId: "dockerhub"]) {
                 sh '''
-                    docker tag capstoneproject ${dockerpath}
+                    docker tag capstoneproject ${dockerpath}:1.1
                     echo "Docker ID and Image: ${dockerpath}"
 
                     # Step 3:
