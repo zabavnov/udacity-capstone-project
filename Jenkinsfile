@@ -39,7 +39,9 @@ pipeline {
             }
             }
         stage('Create k8s-cluster') {
-
+        when {
+       branch 'create-cluster'
+        }
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
              sh '''
@@ -62,12 +64,26 @@ pipeline {
         }
         }
         stage('Deploy k8s cluster') {
+        when {
+       branch 'master'
+        }
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
-             sh 'whoami && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods && eksctl utils describe-stacks --region=us-west-2 --cluster=prod'
+             sh 'kubectl get pods && aws eks update-kubeconfig --region us-west-2 --name prod && kubectl apply --filename=k8-config.yml && kubectl get pods'
              }
         }
         }
-
+        stage('Create k8s-cluster') {
+        when {
+       branch 'remove-cluster'
+        }
+             steps {
+            withAWS(region:'us-west-2',credentials: 'aws-k8s') {
+             sh '''
+             eksctl delete cluster --region=us-west-2 --name=prod
+             '''
+             }
+        }
+        }
      }
 }
