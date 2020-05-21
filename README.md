@@ -4,5 +4,5 @@
 - update k8-config.yml
 - run master pipeline
 
-# Removing Deployment
+# Removing Cluster
 - run remove-cluster pipeline
