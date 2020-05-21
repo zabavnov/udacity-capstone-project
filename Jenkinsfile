@@ -42,9 +42,7 @@ pipeline {
             }
             }
         stage('Create k8s-cluster') {
-        when {
-       branch 'test'
-        }
+
              steps {
             withAWS(region:'us-west-2',credentials: 'aws-k8s') {
              sh '''
@@ -56,6 +54,8 @@ pipeline {
             --version 1.16 \
             --nodegroup-name nodes \
             --node-type t3.medium \
+            --ssh-access \
+            --ssh-public-key my-public-key.pub \
             --node-ami auto \
             --nodes 2 \
             --nodes-min 1 \
